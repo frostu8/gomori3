@@ -4,7 +4,8 @@
   "description": "big man gilbert's mod loader for OMORI.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c ./rollup.config.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/frostu8/gomori3#readme",
   "devDependencies": {
-    "rollup": "^2.39.0"
+    "rollup": "^2.39.0",
+    "rollup-plugin-copy": "^3.3.0"
   }
 }

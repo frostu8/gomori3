@@ -1,7 +1,18 @@
+import copy from 'rollup-plugin-copy'
+
 export default {
     input: 'src/index.js',
     output: {
         file: 'build/js/gomori.js',
         format: 'cjs',
     },
+    plugins: [
+        copy({
+            targets: [
+                { src: 'static/index.html', dest: 'build/' },
+                { src: 'static/js/*.js', dest: 'build/js/' },
+                { src: 'static/js/libs/adm-zip', dest: 'build/js/libs/' },
+            ]
+        })
+    ],
 }

@@ -33,7 +33,6 @@ ModLoader.mods = [];
  * Load all mods into the mod loader.
  */
 ModLoader.load = function() {
-    this.mods.push('trolled');
 }
 
 /**
