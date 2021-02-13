@@ -1,3 +1,10 @@
+import Mod from './Mod';
+
+const fs = require('fs');
+const path = require('path');
+
+const MODS_DIR = 'www/mods';
+
 /**
  * @class
  *
@@ -33,6 +40,14 @@ ModLoader.mods = [];
  * Load all mods into the mod loader.
  */
 ModLoader.load = function() {
+    // Attempt to create a mod folder if it doesn't exist
+    if (!fs.existsSync(MODS_DIR)) fs.mkdirSync(MODS_DIR);
+
+    fs.readdirSync(MODS_DIR)
+        .map(filename => path.resolve(MODS_DIR, filename))
+        .forEach(modPath => {
+            this.mods.push(new Mod(modPath));
+        });
 }
 
 /**
