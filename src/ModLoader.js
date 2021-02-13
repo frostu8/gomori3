@@ -46,21 +46,34 @@ ModLoader.load = function() {
     fs.readdirSync(MODS_DIR)
         .map(filename => path.resolve(MODS_DIR, filename))
         .forEach(modPath => {
-            try {
-                const mod = Mod.load(modPath);
+            const mod = new Mod(modPath);
 
-                // check if our id exists
-                if (!mod.id)
-                    throw new Error('Missing "id" field in manifest');
-
-                // check if a mod with the same id already exists
-                if (this.mods.some(otherMod => mod.id === otherMod.id))
-                    throw new Error(`Conflicting id "${mod.id}"`);
-
-                this.mods.push(mod);
-            } catch (err) {
-                console.error(`Failed to load mod ${modPath}: ${err.stack}`);
+            // load files
+            if (!mod.loadFs()) {
+                console.warn(`Did not load ${modPath} because it is not a supported mod format.`);
+                return;
             }
+
+            // load manifest
+            try {
+                if (!mod.loadMeta()) {
+                    console.warn(`Did not load ${modPath} because it does not contain a mod.json`);
+                    return;
+                }
+            } catch (err) {
+                console.error(`Failed to load mod ${modPath} because of invalid JSON: ${err.message}`);
+                return;
+            }
+
+            // check if our id exists
+            if (!mod.id)
+                console.error(`Failed to load mod ${modPath} because it is missing an id.`);
+
+            // check if a mod with the same id already exists
+            if (this.mods.some(otherMod => mod.id === otherMod.id))
+                console.error(`Mod ${modPath} cannot load because of conflicting id "${mod.id}"`);
+
+            this.mods.push(mod);
         });
 }
 

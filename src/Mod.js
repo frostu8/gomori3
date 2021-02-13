@@ -14,42 +14,45 @@ class Mod {
      * @param {string} modPath - The path to the mod file/folder.
      */
     constructor(modPath) {
-        this.modFs = this._selectFs(modPath);
+        this.path = modPath;
+        this.modFs = null;
 
         this.meta = null;
     }
-    
+
     /**
-     * Constructs a mod and loads it.
+     * Selects a mod filesystem.
+     *
+     * @returns {boolean} - If a mod filesystem was successfully selected.
      */
-    static load(modPath) {
-        const mod = new Mod(modPath);
-        mod.loadMeta();
-        return mod;
+    loadFs() {
+        const stats = fs.statSync(this.path);
+
+        if (stats.isDirectory()) {
+            // use directory mod fs if this is a directory
+            this.modFs = new DirModFs(this.path);
+        } else if (stats.isFile() && path.extname(this.path) === '.zip') {
+            // use zip mod fs if this is a zip file
+            this.modFs = new ZipModFs(this.path);
+        } 
+
+        return !!this.modFs;
     }
 
     /**
-     * Loads the meta from the modFs.
+     * Loads the meta from the modFs. This will throw if there is an error in
+     * the JSON.
+     *
+     * @returns {boolean} - If a mod.json was located.
      */
     loadMeta() {
         const metaFile = this.modFs.getFile('mod.json');
 
-        if (!metaFile) throw new Error('mod.json not found!');
+        if (metaFile) {
+            this.meta = JSON.parse(metaFile.toString());
+        }
 
-        this.meta = JSON.parse(metaFile.toString());
-    }
-
-    /** @private */
-    _selectFs(modPath) {
-        const stats = fs.statSync(modPath);
-
-        // use directory mod fs if this is a directory
-        if (stats.isDirectory()) return new DirModFs(modPath);
-        // use zip mod fs if this is a zip file
-        if (stats.isFile() && path.extname(modPath) === '.zip') return new ZipModFs(modPath);
-
-        // throw if there was no fs found
-        throw new Error(`Unsupported mod format: ${modPath}`);
+        return !!this.meta;
     }
 
     /**
