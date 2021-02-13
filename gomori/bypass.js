@@ -85,3 +85,5 @@ Scene_OmoriFile.prototype.saveGame = function() {
     this.updateSaveIndexCursor();
     };
 };
+
+Imported["Archeia_Steamworks"] = 1.0

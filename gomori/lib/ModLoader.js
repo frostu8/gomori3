@@ -3,7 +3,7 @@
  *
  * @class
  */
-ModLoader = function() {
+function ModLoader() {
     throw new Error('This is a static class');
 }
 
