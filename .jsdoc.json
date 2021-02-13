@@ -1,0 +1,12 @@
+{
+    "plugins": ["plugins/markdown"],
+    "source": {
+        "include": ["gomori/lib"],
+        "includePattern": ".+\\.js$"
+    },
+    "sourceType": "module",
+    "opts": {
+        "destination": "./docbuild/",
+        "access": "all"
+    }
+}
