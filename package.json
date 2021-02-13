@@ -1,0 +1,23 @@
+{
+  "name": "gomori3",
+  "version": "1.0.0",
+  "description": "big man gilbert's mod loader for OMORI.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frostu8/gomori3.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frostu8/gomori3/issues"
+  },
+  "homepage": "https://github.com/frostu8/gomori3#readme",
+  "devDependencies": {
+    "rollup": "^2.39.0"
+  }
+}

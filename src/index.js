@@ -1,9 +1,9 @@
-const ModLoader = require('./gomori/lib/ModLoader');
+import ModLoader from './lib/ModLoader';
 
 (() => {
     try {
         // inject bypass scripts
-        ModLoader.bypass(window);
+        ModLoader.bypass();
 
         // load mods
         ModLoader.load();

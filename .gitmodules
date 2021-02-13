@@ -1,3 +1,3 @@
-[submodule "gomori/adm-zip"]
-	path = gomori/adm-zip
+[submodule "static/js/libs/adm-zip"]
+	path = static/js/libs/adm-zip
 	url = https://github.com/cthackers/adm-zip

@@ -33,23 +33,21 @@ ModLoader.mods = [];
  * Load all mods into the mod loader.
  */
 ModLoader.load = function() {
+    this.mods.push('trolled');
 }
 
 /**
  * Injects a Steam stub script so mods do not interfere with Steam, and allows
  * use in the NW.js sdk.
- *
- * @param {Window} window - The browser context window, unavailable to us in 
- * Node context.
  */
-ModLoader.bypass = function(window) {
+ModLoader.bypass = function() {
     window.PluginManager = class extends window.PluginManager {
         static setup(plugins) {
             // call super function
             super.setup(plugins);
 
             // stub out steamworks
-            const url = 'gomori/bypass.js';
+            const url = 'js/bypass.js';
             const script = window.document.createElement('script');
 
             script.type = 'text/javascript';
@@ -62,4 +60,4 @@ ModLoader.bypass = function(window) {
     }
 }
 
-module.exports = ModLoader;
+export default ModLoader;
