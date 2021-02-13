@@ -1,7 +1,22 @@
 /**
- * The Gomori Mod Loader, the supervisor of all modding activities.
- *
  * @class
+ *
+ * @classdesc 
+ * The Gomori Mod Loader, the supervisor of all modding activities. It is
+ * directly responsible for compiling and injecting mod content into the game.
+ * To load mods, the Mod Loader processes each mod through 3 stages: the
+ * `load`, `compile` and `inject` stages.
+ *
+ * The `load` stage recognizes mods in the `mods/` directory, and loads their
+ * metadata.
+ *
+ * The `compile` stage loads all database entries from the mods, and organizes
+ * them in a way that they will not conflict with each other. This also 
+ * corrects any reference to database entries in event pages. This is where
+ * most conflicts are caught.
+ *
+ * The `inject` stage takes the model delta created by the `compile` stage and
+ * applies it to the game.
  */
 function ModLoader() {
     throw new Error('This is a static class');
