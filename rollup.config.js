@@ -4,7 +4,8 @@ export default {
     input: 'src/index.js',
     output: {
         file: 'build/js/gomori.js',
-        format: 'cjs',
+        format: 'iife',
+        name: 'ModLoader',
     },
     plugins: [
         copy({

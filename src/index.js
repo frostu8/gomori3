@@ -1,13 +1,13 @@
 import ModLoader from './lib/ModLoader';
 
-(() => {
-    try {
-        // inject bypass scripts
-        ModLoader.bypass();
+try {
+    // inject bypass scripts
+    ModLoader.bypass();
 
-        // load mods
-        ModLoader.load();
-    } catch (err) {
-        alert(`GOMORI encountered a critical error: ${err.stack}`);
-    }
-})();
+    // load mods
+    ModLoader.load();
+} catch (err) {
+    alert(`GOMORI encountered a critical error: ${err.stack}`);
+}
+
+export default ModLoader;
