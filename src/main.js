@@ -1,4 +1,4 @@
-import ModLoader from './lib/ModLoader';
+import ModLoader from './ModLoader';
 
 try {
     // inject bypass scripts

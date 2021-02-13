@@ -1,7 +1,7 @@
 import copy from 'rollup-plugin-copy'
 
 export default {
-    input: 'src/index.js',
+    input: 'src/main.js',
     output: {
         file: 'build/js/gomori.js',
         format: 'iife',
