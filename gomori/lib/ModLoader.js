@@ -12,7 +12,7 @@ ModLoader = function() {
  *
  * @type {Array.<Mod>}
  */
-ModLoader.mods
+ModLoader.mods = [];
 
 /**
  * Load all mods into the mod loader.
