@@ -46,7 +46,21 @@ ModLoader.load = function() {
     fs.readdirSync(MODS_DIR)
         .map(filename => path.resolve(MODS_DIR, filename))
         .forEach(modPath => {
-            this.mods.push(new Mod(modPath));
+            try {
+                const mod = Mod.load(modPath);
+
+                // check if our id exists
+                if (!mod.id)
+                    throw new Error('Missing "id" field in manifest');
+
+                // check if a mod with the same id already exists
+                if (this.mods.some(otherMod => mod.id === otherMod.id))
+                    throw new Error(`Conflicting id "${mod.id}"`);
+
+                this.mods.push(mod);
+            } catch (err) {
+                console.error(`Failed to load mod ${modPath}: ${err.stack}`);
+            }
         });
 }
 

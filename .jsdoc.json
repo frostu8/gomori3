@@ -1,7 +1,7 @@
 {
     "plugins": ["plugins/markdown"],
     "source": {
-        "include": ["gomori/lib"],
+        "include": ["src/"],
         "includePattern": ".+\\.js$"
     },
     "sourceType": "module",
