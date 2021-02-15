@@ -28,8 +28,7 @@ class IdGenerator {
             this._last_id++;
 
             // get next id
-            let next_id = this._allocated[0];
-            this._allocated = this._allocated.slice(1);
+            let next_id = this._allocated.shift();
 
             // doesn't hurt to test
             if (next_id < this._last_id) throw new Error('improperly sorted id list!');
