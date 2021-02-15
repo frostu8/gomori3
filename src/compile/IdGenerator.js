@@ -6,7 +6,7 @@ class IdGenerator {
     constructor(allocated) {
         // For some reason, we have to pass a sorting callback to Array.sort(),
         // because you don't deserve nice things.
-        this._allocated = this.allocated.sort((a, b) => a - b);
+        this._allocated = allocated.sort((a, b) => a - b);
 
         // Initial value of last_id is based off of the first id of each 
         // database model in RPGMV minus one. The first id of database models
@@ -28,7 +28,7 @@ class IdGenerator {
 
             // get next id
             let next_id = this._allocated[0];
-            this._allocated = this.allocated.slice(1);
+            this._allocated = this._allocated.slice(1);
 
             // doesn't hurt to test
             if (next_id < this._last_id) throw new Error('improperly sorted id list!');
