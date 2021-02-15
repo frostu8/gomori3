@@ -52,4 +52,21 @@ function parse(str) {
     return result;
 }
 
-export { parse };
+/**
+ * Parses preprocessor directives from RPGMV models, placing them into a field
+ * called "preprocessor." This operation is done **in place**.
+ *
+ * @param {Array.<Object>} objs - A list of RPGMV models.
+ */
+function inject(objs) {
+    objs.forEach(model => {
+        // if the model is null (typically the first element of an RPGMV model)
+        // do not do anything to it
+        if (!model) return;
+
+        // pass the notes through a parser
+        model.preprocessor = parse(model.note);
+    });
+}
+
+export { parse, inject };
