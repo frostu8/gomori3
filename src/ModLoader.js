@@ -71,7 +71,7 @@ ModLoader.load = function() {
 
             // check if a mod with the same id already exists
             if (this.mods.some(otherMod => mod.id === otherMod.id))
-                console.error(`Mod ${modPath} cannot load because of conflicting id "${mod.id}"`);
+                console.error(`Failed to load mod ${modPath} because of conflicting id "${mod.id}"`);
 
             this.mods.push(mod);
         });
